@@ -1,39 +1,247 @@
 import { TabView, TabPanel } from 'primereact/tabview';
 import { InputText } from 'primereact/inputtext';
+import { InputTextarea } from 'primereact/inputtextarea';
+import { Checkbox } from 'primereact/checkbox';
 
 export default function Home() {
   return (
-    <div class="grid">
-      <div class="col">
+    <div className="grid">
+      <div className="col">
         <div className="card">
           <TabView>
-            <TabPanel header="Header I">
+            <TabPanel header="About ME">
               <div className="flex flex-column gap-2">
-                <label htmlFor="username">Username</label>
-                <InputText id="username" aria-describedby="username-help" />
-            </div>
+                <label htmlFor="heading">Heading</label>
+                <InputText id="heading" />
+              </div>
+              <div className="flex flex-column gap-2">
+                <label htmlFor="subtitle">Subtitle</label>
+                <InputText id="subtitle" />
+              </div>
+              <div className="flex flex-column gap-2">
+                <label htmlFor="Banner-URL">Banner URL</label>
+                <InputText id="Banner-URL" />
+              </div>
+              <div className="flex flex-column gap-2">
+                <label htmlFor="about-me">About me</label>
+                <InputTextarea  id="About-me" rows={5} />
+              </div>
+              <div className="flex flex-column gap-2">
+                <label htmlFor="heading">Heading</label>
+                <InputText id="heading" />
+              </div>
             </TabPanel>
-            <TabPanel header="Header II">
-              <p className="m-0">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-                eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo
-                enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
-                ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
-              </p>
+            <TabPanel header="Additional">
+              <div class="formgrid grid">
+                <div class="field col">
+                  <div className="flex flex-column gap-2">
+                    <label htmlFor="heading">Heading</label>
+                    <InputText id="heading" />
+                  </div>
+                </div>
+                <div class="field col">
+                  <div className="flex flex-column gap-2">
+                    <label htmlFor="heading">Heading</label>
+                    <InputText id="heading" />
+                  </div>
+                </div>
+                <div class="field col">
+                  <div className="flex flex-column gap-2">
+                    <label htmlFor="heading">Heading</label>
+                    <InputText id="heading" />
+                  </div>
+                </div>
+                <div class="field col">
+                  <div className="flex flex-column gap-2">
+                    <label htmlFor="heading">Heading</label>
+                    <InputText id="heading" />
+                  </div>
+                </div>
+                <div class="field col">
+                  <div className="flex flex-column gap-2">
+                    <label htmlFor="heading">Heading</label>
+                    <InputText id="heading" />
+                  </div>
+                </div>
+                <div class="field col">
+                  <div className="flex flex-column gap-2">
+                    <label htmlFor="heading">Heading</label>
+                    <InputText id="heading" />
+                  </div>
+                </div>
+                <div class="field col">
+                  <div className="flex flex-column gap-2">
+                    <label htmlFor="heading">Heading</label>
+                    <InputText id="heading" />
+                  </div>
+                </div>
+                <div class="field col">
+                  <div className="flex flex-column gap-2">
+                    <label htmlFor="heading">Heading</label>
+                    <InputText id="heading" />
+                  </div>
+                </div>
+                <div class="field col">
+                  <div className="flex flex-column gap-2">
+                    <label htmlFor="heading">Heading</label>
+                    <InputText id="heading" />
+                  </div>
+                </div>
+              </div>
             </TabPanel>
-            <TabPanel header="Header III">
-              <p className="m-0">
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
-                quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in
-                culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
-                Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-              </p>
+            <TabPanel header="Social">
+              <div class="formgrid grid">
+                <div class="field col">
+                  <div className="flex flex-column gap-2">
+                    <label htmlFor="heading">Heading</label>
+                    <InputText id="heading" />
+                  </div>
+                </div>
+                <div class="field col">
+                  <div className="flex flex-column gap-2">
+                    <label htmlFor="heading">Heading</label>
+                    <InputText id="heading" />
+                  </div>
+                </div>
+                <div class="field col">
+                  <div className="flex flex-column gap-2">
+                    <label htmlFor="heading">Heading</label>
+                    <InputText id="heading" />
+                  </div>
+                </div>
+                <div class="field col">
+                  <div className="flex flex-column gap-2">
+                    <label htmlFor="heading">Heading</label>
+                    <InputText id="heading" />
+                  </div>
+                </div>
+                <div class="field col">
+                  <div className="flex flex-column gap-2">
+                    <label htmlFor="heading">Heading</label>
+                    <InputText id="heading" />
+                  </div>
+                </div>
+                <div class="field col">
+                  <div className="flex flex-column gap-2">
+                    <label htmlFor="heading">Heading</label>
+                    <InputText id="heading" />
+                  </div>
+                </div>
+                <div class="field col">
+                  <div className="flex flex-column gap-2">
+                    <label htmlFor="heading">Heading</label>
+                    <InputText id="heading" />
+                  </div>
+                </div>
+                <div class="field col">
+                  <div className="flex flex-column gap-2">
+                    <label htmlFor="heading">Heading</label>
+                    <InputText id="heading" />
+                  </div>
+                </div>
+                <div class="field col">
+                  <div className="flex flex-column gap-2">
+                    <label htmlFor="heading">Heading</label>
+                    <InputText id="heading" />
+                  </div>
+                </div>
+              </div>
+            </TabPanel>
+            <TabPanel header="Others">
+              <div className="flex field flex-column gap-2">
+                <label htmlFor="heading">Heading</label>
+                <InputText id="heading" />
+              </div>
+              <div className="flex flex-column gap-2">
+                <label htmlFor="heading">Heading</label>
+                <div className="flex flex-wrap justify-content-left gap-3">
+                  <div className="flex align-items-left">
+                      <Checkbox inputId="ingredient1" name="pizza" value="Cheese"  />
+                      <label htmlFor="ingredient1" className="ml-2">Cheese</label>
+                  </div>
+                  <div className="flex align-items-left">
+                      <Checkbox inputId="ingredient2" name="pizza" value="Mushroom"  />
+                      <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
+                  </div>
+                  <div className="flex align-items-left">
+                      <Checkbox inputId="ingredient3" name="pizza" value="Pepper"  />
+                      <label htmlFor="ingredient3" className="ml-2">Pepper</label>
+                  </div>
+                  <div className="flex align-items-left">
+                      <Checkbox inputId="ingredient4" name="pizza" value="Onion"  />
+                      <label htmlFor="ingredient4" className="ml-2">Onion</label>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-column gap-2">
+                <label htmlFor="heading">Heading</label>
+                <div className="flex flex-wrap justify-content-left gap-3">
+                  <div className="flex align-items-left">
+                      <Checkbox inputId="ingredient1" name="pizza" value="Cheese"  />
+                      <label htmlFor="ingredient1" className="ml-2">Cheese</label>
+                  </div>
+                  <div className="flex align-items-left">
+                      <Checkbox inputId="ingredient2" name="pizza" value="Mushroom"  />
+                      <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
+                  </div>
+                  <div className="flex align-items-left">
+                      <Checkbox inputId="ingredient3" name="pizza" value="Pepper"  />
+                      <label htmlFor="ingredient3" className="ml-2">Pepper</label>
+                  </div>
+                  <div className="flex align-items-left">
+                      <Checkbox inputId="ingredient4" name="pizza" value="Onion"  />
+                      <label htmlFor="ingredient4" className="ml-2">Onion</label>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-column gap-2">
+                <label htmlFor="heading">Heading</label>
+                <div className="flex flex-wrap justify-content-left gap-3">
+                  <div className="flex align-items-left">
+                      <Checkbox inputId="ingredient1" name="pizza" value="Cheese"  />
+                      <label htmlFor="ingredient1" className="ml-2">Cheese</label>
+                  </div>
+                  <div className="flex align-items-left">
+                      <Checkbox inputId="ingredient2" name="pizza" value="Mushroom"  />
+                      <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
+                  </div>
+                  <div className="flex align-items-left">
+                      <Checkbox inputId="ingredient3" name="pizza" value="Pepper"  />
+                      <label htmlFor="ingredient3" className="ml-2">Pepper</label>
+                  </div>
+                  <div className="flex align-items-left">
+                      <Checkbox inputId="ingredient4" name="pizza" value="Onion"  />
+                      <label htmlFor="ingredient4" className="ml-2">Onion</label>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-column gap-2">
+                <label htmlFor="heading">Heading</label>
+                <div className="flex flex-wrap justify-content-left gap-3">
+                  <div className="flex align-items-left">
+                      <Checkbox inputId="ingredient1" name="pizza" value="Cheese"  />
+                      <label htmlFor="ingredient1" className="ml-2">Cheese</label>
+                  </div>
+                  <div className="flex align-items-left">
+                      <Checkbox inputId="ingredient2" name="pizza" value="Mushroom"  />
+                      <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
+                  </div>
+                  <div className="flex align-items-left">
+                      <Checkbox inputId="ingredient3" name="pizza" value="Pepper"  />
+                      <label htmlFor="ingredient3" className="ml-2">Pepper</label>
+                  </div>
+                  <div className="flex align-items-left">
+                      <Checkbox inputId="ingredient4" name="pizza" value="Onion"  />
+                      <label htmlFor="ingredient4" className="ml-2">Onion</label>
+                  </div>
+                </div>
+              </div>
             </TabPanel>
           </TabView>
         </div>
       </div>
-      <div class="col">
-        <div class="text-center p-3 border-round-sm bg-primary font-bold ">right</div>
+      <div className="col">
+        <div className="text-center p-3 border-round-sm bg-primary font-bold ">right</div>
       </div>
     </div>
   )
