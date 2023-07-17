@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef  } from "react";
 import { TabView, TabPanel } from 'primereact/tabview';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Checkbox } from 'primereact/checkbox';
 import { SelectButton } from 'primereact/selectbutton';
+import { Editor } from "primereact/editor";
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 
 // import "@uiw/react-md-editor/markdown-editor.css";
@@ -21,11 +22,31 @@ export default function Home() {
   const [value, setValue] = useState(options[0]);
   const [activeIndex, setActiveIndex] = useState('Options');
 
-  const source = `## Markdown Preview
+  const headingRef = useRef('## Markdown Preview');
+  const subtitleRef = useRef('> todo: React component preview markdown text.');
+  const codeRef = useRef('');
+  let source = "";
+
+  const headingChange = (event) => {
+    headingRef.current = event.target.value;
+  };
+
+  const subtitleChange = (event) => {
+    subtitleRef.current = event.target.value;
+  };
+
+  const codeChange = (event) => {
+    codeRef.current = event.htmlValue;
+    source = event.htmlValue;
+  };
+
+  source = (headingRef.current ? headingRef.current : '') + (subtitleRef.current ? "\n" + subtitleRef.current : '');
+  codeRef.current = source;
+  // const source = `## Markdown Preview
 
 
-  > todo: React component preview markdown text.
-  `;
+  // > todo: React component preview markdown text.
+  // `;
 
   const changeTab = (e) => {
     console.log(e.value)
@@ -41,14 +62,14 @@ export default function Home() {
           <Splitter >
             <SplitterPanel >
               <TabView>
-                <TabPanel header="About ME">
+                <TabPanel header="About Me">
                   <div className="flex flex-column gap-2">
                     <label htmlFor="heading">Heading</label>
-                    <InputText id="heading" />
+                    <InputText id="heading" value={headingRef.current} onChange={headingChange} />
                   </div>
                   <div className="flex flex-column gap-2">
                     <label htmlFor="subtitle">Subtitle</label>
-                    <InputText id="subtitle" />
+                    <InputText id="subtitle" value={subtitleRef.current} onChange={subtitleChange} />
                   </div>
                   <div className="flex flex-column gap-2">
                     <label htmlFor="Banner-URL">Banner URL</label>
@@ -268,6 +289,9 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
+                </TabPanel>
+                <TabPanel header="Code">
+                  <Editor style={{ height: '80vh' }} value={codeRef} onTextChange={(e) => codeChange(e)}/>
                 </TabPanel>
               </TabView>
             </SplitterPanel>
