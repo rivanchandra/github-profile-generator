@@ -22,8 +22,16 @@ export default function Home() {
   const [value, setValue] = useState(options[0]);
   const [activeIndex, setActiveIndex] = useState('Options');
 
-  const headingRef = useRef('## Markdown Preview');
-  const subtitleRef = useRef('> todo: React component preview markdown text.');
+  const [heading, setHeading] = useState('Markdown Preview');
+  const [subtitle, setSubtitle] = useState('React component preview markdown text.');
+  const [banner, setBanner] = useState('https://arturssmirnovs.github.io/github-profile-readme-generator/images/banner.png');
+  const [aboutMe, setAboutMe] = useState('I made this project just for fun, it allows you to create nice and simple GitHub Readme files that you can copy/paste and use in your profile.');
+
+  // const headingRef = useRef('Markdown Preview');
+  // const subtitleRef = useRef('React component preview markdown text.');
+  // const bannerRef = useRef('https://arturssmirnovs.github.io/github-profile-readme-generator/images/banner.png');
+  // const aboutMeRef = useRef('I made this project just for fun, it allows you to create nice and simple GitHub Readme files that you can copy/paste and use in your profile.');
+
   const codeRef = useRef('');
   let source = "";
 
@@ -35,12 +43,23 @@ export default function Home() {
     subtitleRef.current = event.target.value;
   };
 
+  const bannerChange = (event) => {
+    bannerRef.current = event.target.value;
+  };
+
+  const aboutMeChange = (event) => {
+    aboutMeRef.current = event.target.value;
+  };
+
   const codeChange = (event) => {
     codeRef.current = event.htmlValue;
     source = event.htmlValue;
   };
 
-  source = (headingRef.current ? headingRef.current : '') + (subtitleRef.current ? "\n" + subtitleRef.current : '');
+  source =  `## Hi there 👋, ${heading ? heading : ``}  
+  ${subtitle ? `#### ${subtitle}` : ``}  
+  ${banner ? `![${subtitle}](${banner})` : ``}
+  ${aboutMe? `> ${aboutMe}` : ``}`;
   codeRef.current = source;
   // const source = `## Markdown Preview
 
@@ -65,78 +84,68 @@ export default function Home() {
                 <TabPanel header="About Me">
                   <div className="flex flex-column gap-2">
                     <label htmlFor="heading">Heading</label>
-                    <InputText id="heading" value={headingRef.current} onChange={headingChange} />
+                    <InputText id="heading" value={heading} onChange={(e)=>setHeading(e.target.value)} />
                   </div>
                   <div className="flex flex-column gap-2">
                     <label htmlFor="subtitle">Subtitle</label>
-                    <InputText id="subtitle" value={subtitleRef.current} onChange={subtitleChange} />
+                    <InputText id="subtitle" value={subtitle} onChange={(e)=>setSubtitle(e.target.value)} />
                   </div>
                   <div className="flex flex-column gap-2">
                     <label htmlFor="Banner-URL">Banner URL</label>
-                    <InputText id="Banner-URL" />
+                    <InputText id="Banner-URL" value={banner} onChange={(e)=>setBanner(e.target.value)} />
                   </div>
                   <div className="flex flex-column gap-2">
                     <label htmlFor="about-me">About me</label>
-                    <InputTextarea  id="About-me" rows={5} />
-                  </div>
-                  <div className="flex flex-column gap-2">
-                    <label htmlFor="heading">Heading</label>
-                    <InputText id="heading" />
+                    <InputTextarea autoResize  id="About-me" rows={5} value={aboutMe} onChange={(e)=>setAboutMe(e.target.value)} />
                   </div>
                 </TabPanel>
                 <TabPanel header="Additional">
                   <div class="formgrid grid">
-                    <div class="field col">
+                    <div class="field col-6">
                       <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Heading</label>
+                        <label htmlFor="heading">🔭 I’m currently working on...</label>
                         <InputText id="heading" />
                       </div>
                     </div>
-                    <div class="field col">
+                    <div class="field col-6">
                       <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Heading</label>
+                        <label htmlFor="heading">🌱 I’m currently learning...</label>
                         <InputText id="heading" />
                       </div>
                     </div>
-                    <div class="field col">
+                    <div class="field col-6">
                       <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Heading</label>
+                        <label htmlFor="heading">👯 I want to collaborate on...</label>
                         <InputText id="heading" />
                       </div>
                     </div>
-                    <div class="field col">
+                    <div class="field col-6">
                       <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Heading</label>
+                        <label htmlFor="heading">🤔 I’m looking for help with...</label>
                         <InputText id="heading" />
                       </div>
                     </div>
-                    <div class="field col">
+                    <div class="field col-6">
                       <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Heading</label>
+                        <label htmlFor="heading">💬 Ask me about...</label>
                         <InputText id="heading" />
                       </div>
                     </div>
-                    <div class="field col">
+                    <div class="field col-6">
                       <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Heading</label>
+                        <label htmlFor="heading">📫 How to reach me:</label>
                         <InputText id="heading" />
                       </div>
                     </div>
-                    <div class="field col">
+                    <div class="field col-6">
                       <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Heading</label>
+                        <label htmlFor="heading">😄 Pronouns:</label>
                         <InputText id="heading" />
                       </div>
                     </div>
-                    <div class="field col">
+                    <div class="field col-6">
                       <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Heading</label>
-                        <InputText id="heading" />
-                      </div>
-                    </div>
-                    <div class="field col">
-                      <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Heading</label>
+                        <label htmlFor="heading">⚡ Fun fact:</label>
                         <InputText id="heading" />
                       </div>
                     </div>
@@ -307,7 +316,7 @@ export default function Home() {
           <div className="card flex justify-content-end"> 
             <SelectButton value={value} onChange={(e) => changeTab(e)} options={options} />
           </div>
-          <div data-color-mode="dark">
+          <div data-color-mode="light">
             <MDPreview source={source} />
           </div>
         </SplitterPanel>
