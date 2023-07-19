@@ -26,6 +26,14 @@ export default function Home() {
   const [subtitle, setSubtitle] = useState('React component preview markdown text.');
   const [banner, setBanner] = useState('https://arturssmirnovs.github.io/github-profile-readme-generator/images/banner.png');
   const [aboutMe, setAboutMe] = useState('I made this project just for fun, it allows you to create nice and simple GitHub Readme files that you can copy/paste and use in your profile.');
+  const [additional1, setAdditional1] = useState('');
+  const [additional2, setAdditional2] = useState('');
+  const [additional3, setAdditional3] = useState('');
+  const [additional4, setAdditional4] = useState('');
+  const [additional5, setAdditional5] = useState('');
+  const [additional6, setAdditional6] = useState('');
+  const [additional7, setAdditional7] = useState('');
+  const [additional8, setAdditional8] = useState('');
 
   // const headingRef = useRef('Markdown Preview');
   // const subtitleRef = useRef('React component preview markdown text.');
@@ -35,31 +43,55 @@ export default function Home() {
   const codeRef = useRef('');
   let source = "";
 
-  const headingChange = (event) => {
-    headingRef.current = event.target.value;
-  };
+  // const headingChange = (event) => {
+  //   headingRef.current = event.target.value;
+  // };
 
-  const subtitleChange = (event) => {
-    subtitleRef.current = event.target.value;
-  };
+  // const subtitleChange = (event) => {
+  //   subtitleRef.current = event.target.value;
+  // };
 
-  const bannerChange = (event) => {
-    bannerRef.current = event.target.value;
-  };
+  // const bannerChange = (event) => {
+  //   bannerRef.current = event.target.value;
+  // };
 
-  const aboutMeChange = (event) => {
-    aboutMeRef.current = event.target.value;
-  };
+  // const aboutMeChange = (event) => {
+  //   aboutMeRef.current = event.target.value;
+  // };
 
   const codeChange = (event) => {
     codeRef.current = event.htmlValue;
     source = event.htmlValue;
   };
 
-  source =  `## Hi there 👋, ${heading ? heading : ``}  
-  ${subtitle ? `#### ${subtitle}` : ``}  
-  ${banner ? `![${subtitle}](${banner})` : ``}
-  ${aboutMe? `> ${aboutMe}` : ``}`;
+  source = `## Hi there 👋, `;
+  if(heading){source = source.concat(heading)}
+  if(subtitle){source = source.concat(`\n #### ${subtitle}`)}
+  if(banner){source = source.concat(`\n ![${subtitle}](${banner})`)}
+  if(aboutMe){source = source.concat(`\n > ${aboutMe}`)}
+  if(additional1){source = source.concat(`\n - 🔭 I’m currently working on ${additional1}`)}
+  if(additional2){source = source.concat(`\n - 🌱 I’m currently learning ${additional2}`)}
+  if(additional3){source = source.concat(`\n - 👯 I want to collaborate on ${additional3}`)}
+  if(additional4){source = source.concat(`\n - 🤔 I’m looking for help with ${additional4}`)}
+  if(additional5){source = source.concat(`\n - 💬 Ask me about ${additional5}`)}
+  if(additional6){source = source.concat(`\n - 📫 How to reach me: ${additional6}`)}
+  if(additional7){source = source.concat(`\n - 😄 Pronouns: ${additional7}`)}
+  if(additional8){source = source.concat(`\n - ⚡ Fun fact: ${additional8}`)}
+
+  // source =  `## Hi there 👋, ${heading || ""}  
+  // ${`#### ${subtitle}` || ""}  
+  // ${`![${subtitle}](${banner})`|| ""}
+  // ${`> ${aboutMe}` || ""}
+  // ${additional1? `- 🔭 I’m currently working on ${additional1}` : ""}
+  // ${additional2? `- 🌱 I’m currently learning ${additional2}` : ""}
+  // ${additional3? `- 👯 I want to collaborate on ${additional3}` : ""}
+  // ${additional4? `- 🤔 I’m looking for help with ${additional4}` : ""}
+  // ${additional5? `- 💬 Ask me about ${additional5}` : ""}
+  // ${additional6? `- 📫 How to reach me: ${additional6}` : ""}
+  // ${additional7? `- 😄 Pronouns: ${additional7}` : ""}
+  // ${additional8? `- ⚡ Fun fact: ${additional8}` : ""}`;
+
+
   codeRef.current = source;
   // const source = `## Markdown Preview
 
@@ -104,49 +136,49 @@ export default function Home() {
                     <div class="field col-6">
                       <div className="flex flex-column gap-2">
                         <label htmlFor="heading">🔭 I’m currently working on...</label>
-                        <InputText id="heading" />
+                        <InputText id="heading" value={additional1} onChange={(e)=>setAdditional1(e.target.value)} />
                       </div>
                     </div>
                     <div class="field col-6">
                       <div className="flex flex-column gap-2">
                         <label htmlFor="heading">🌱 I’m currently learning...</label>
-                        <InputText id="heading" />
+                        <InputText id="heading" value={additional2} onChange={(e)=>setAdditional2(e.target.value)} />
                       </div>
                     </div>
                     <div class="field col-6">
                       <div className="flex flex-column gap-2">
                         <label htmlFor="heading">👯 I want to collaborate on...</label>
-                        <InputText id="heading" />
+                        <InputText id="heading" value={additional3} onChange={(e)=>setAdditional3(e.target.value)} />
                       </div>
                     </div>
                     <div class="field col-6">
                       <div className="flex flex-column gap-2">
                         <label htmlFor="heading">🤔 I’m looking for help with...</label>
-                        <InputText id="heading" />
+                        <InputText id="heading" value={additional4} onChange={(e)=>setAdditional4(e.target.value)} />
                       </div>
                     </div>
                     <div class="field col-6">
                       <div className="flex flex-column gap-2">
                         <label htmlFor="heading">💬 Ask me about...</label>
-                        <InputText id="heading" />
+                        <InputText id="heading" value={additional5} onChange={(e)=>setAdditional5(e.target.value)} />
                       </div>
                     </div>
                     <div class="field col-6">
                       <div className="flex flex-column gap-2">
                         <label htmlFor="heading">📫 How to reach me:</label>
-                        <InputText id="heading" />
+                        <InputText id="heading" value={additional6} onChange={(e)=>setAdditional6(e.target.value)} />
                       </div>
                     </div>
                     <div class="field col-6">
                       <div className="flex flex-column gap-2">
                         <label htmlFor="heading">😄 Pronouns:</label>
-                        <InputText id="heading" />
+                        <InputText id="heading" value={additional7} onChange={(e)=>setAdditional7(e.target.value)} />
                       </div>
                     </div>
                     <div class="field col-6">
                       <div className="flex flex-column gap-2">
                         <label htmlFor="heading">⚡ Fun fact:</label>
-                        <InputText id="heading" />
+                        <InputText id="heading" value={additional8} onChange={(e)=>setAdditional8(e.target.value)} />
                       </div>
                     </div>
                   </div>
