@@ -35,6 +35,20 @@ export default function Home() {
   const [additional7, setAdditional7] = useState('');
   const [additional8, setAdditional8] = useState('');
 
+  const [github, setGithub] = useState('');
+  const [devTo, setDevTo] = useState('');
+  const [hashnode, setHashnode] = useState('');
+  const [linkedin, setLinkedin] = useState('');
+  const [facebook, setFacebook] = useState('');
+  const [instagram, setInstagram] = useState('');
+  const [twitter, setTwitter] = useState('');
+  const [codepen, setCodepen] = useState('');
+  const [codesandbox, setCodesandbox] = useState('');
+  const [stackoverflow, setStackoverflow] = useState('');
+  const [youtube, setYoutube] = useState('');
+  const [reddit, setReddit] = useState('');
+  const [website, setWebsite] = useState('');
+
   // const headingRef = useRef('Markdown Preview');
   // const subtitleRef = useRef('React component preview markdown text.');
   // const bannerRef = useRef('https://arturssmirnovs.github.io/github-profile-readme-generator/images/banner.png');
@@ -78,6 +92,23 @@ export default function Home() {
   if(additional7){source = source.concat(`\n - 😄 Pronouns: ${additional7}`)}
   if(additional8){source = source.concat(`\n - ⚡ Fun fact: ${additional8}`)}
 
+  if(github || devTo || hashnode || linkedin || facebook || instagram || twitter || codepen || codesandbox || stackoverflow || youtube || reddit || website){
+    if(github){source = source.concat(`\n ### Social \n`)}
+  }
+  if(github){source = source.concat(` [![](https://img.shields.io/badge/-Github-informational?style=flat-square&logo=github&logoColor=white&color=blue)](${github})`)}
+  if(devTo){source = source.concat(` [![](https://img.shields.io/badge/-Dev.To-informational?style=flat-square&logo=devdotto&logoColor=white&color=blue)](${devTo})`)}
+  if(hashnode){source = source.concat(` [![](https://img.shields.io/badge/-Hashnode-informational?style=flat-square&logo=hashnode&logoColor=white&color=blue)](${hashnode})`)}
+  if(linkedin){source = source.concat(` [![](https://img.shields.io/badge/-Linkedin-informational?style=flat-square&logo=linkedin&logoColor=white&color=blue)](${linkedin})`)}
+  if(facebook){source = source.concat(` [![](https://img.shields.io/badge/-Facebook-informational?style=flat-square&logo=facebook&logoColor=white&color=blue)](${facebook})`)}
+  if(instagram){source = source.concat(` [![](https://img.shields.io/badge/-Instagram-informational?style=flat-square&logo=instagram&logoColor=white&color=blue)](${instagram})`)}
+  if(twitter){source = source.concat(` [![](https://img.shields.io/badge/-Twitter-informational?style=flat-square&logo=twitter&logoColor=white&color=blue)](${twitter})`)}
+  if(codepen){source = source.concat(` [![](https://img.shields.io/badge/-Codepen-informational?style=flat-square&logo=codepen&logoColor=white&color=blue)](${codepen})`)}
+  if(codesandbox){source = source.concat(` [![](https://img.shields.io/badge/-Codesandbox-informational?style=flat-square&logo=codesandbox&logoColor=white&color=blue)](${codesandbox})`)}
+  if(stackoverflow){source = source.concat(` [![](https://img.shields.io/badge/-Stackoverflow-informational?style=flat-square&logo=stackoverflow&logoColor=white&color=blue)](${stackoverflow})`)}
+  if(youtube){source = source.concat(` [![](https://img.shields.io/badge/-Youtube-informational?style=flat-square&logo=youtube&logoColor=white&color=blue)](${youtube})`)}
+  if(reddit){source = source.concat(` [![](https://img.shields.io/badge/-Reddit-informational?style=flat-square&logo=reddit&logoColor=white&color=blue)](${reddit})`)}
+  if(website){source = source.concat(` [![](https://img.shields.io/badge/-Website-informational?style=flat-square&logo=circle&logoColor=white&color=blue)](${website})`)}
+  
   // source =  `## Hi there 👋, ${heading || ""}  
   // ${`#### ${subtitle}` || ""}  
   // ${`![${subtitle}](${banner})`|| ""}
@@ -187,56 +218,80 @@ export default function Home() {
                   <div class="formgrid grid">
                     <div class="field col">
                       <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Heading</label>
-                        <InputText id="heading" />
+                        <label htmlFor="heading">Github</label>
+                        <InputText id="heading" value={github} onChange={(e)=>setGithub(e.target.value)} />
                       </div>
                     </div>
                     <div class="field col">
                       <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Heading</label>
-                        <InputText id="heading" />
+                        <label htmlFor="heading">DEV.TO</label>
+                        <InputText id="heading" value={devTo} onChange={(e)=>setDevTo(e.target.value)} />
                       </div>
                     </div>
                     <div class="field col">
                       <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Heading</label>
-                        <InputText id="heading" />
+                        <label htmlFor="heading">Hashnode</label>
+                        <InputText id="heading" value={hashnode} onChange={(e)=>setHashnode(e.target.value)} />
                       </div>
                     </div>
                     <div class="field col">
                       <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Heading</label>
-                        <InputText id="heading" />
+                        <label htmlFor="heading">LinkedIn</label>
+                        <InputText id="heading" value={linkedin} onChange={(e)=>setLinkedin(e.target.value)} />
                       </div>
                     </div>
                     <div class="field col">
                       <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Heading</label>
-                        <InputText id="heading" />
+                        <label htmlFor="heading">Facebook</label>
+                        <InputText id="heading" value={facebook} onChange={(e)=>setFacebook(e.target.value)} />
                       </div>
                     </div>
                     <div class="field col">
                       <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Heading</label>
-                        <InputText id="heading" />
+                        <label htmlFor="heading">Instagram</label>
+                        <InputText id="heading" value={instagram} onChange={(e)=>setInstagram(e.target.value)} />
                       </div>
                     </div>
                     <div class="field col">
                       <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Heading</label>
-                        <InputText id="heading" />
+                        <label htmlFor="heading">Twitter</label>
+                        <InputText id="heading" value={twitter} onChange={(e)=>setTwitter(e.target.value)} />
                       </div>
                     </div>
                     <div class="field col">
                       <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Heading</label>
-                        <InputText id="heading" />
+                        <label htmlFor="heading">Codepen</label>
+                        <InputText id="heading" value={codepen} onChange={(e)=>setCodepen(e.target.value)} />
                       </div>
                     </div>
                     <div class="field col">
                       <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Heading</label>
-                        <InputText id="heading" />
+                        <label htmlFor="heading">CodeSandbox</label>
+                        <InputText id="heading" value={codesandbox} onChange={(e)=>setCodesandbox(e.target.value)} />
+                      </div>
+                    </div>
+                    <div class="field col">
+                      <div className="flex flex-column gap-2">
+                        <label htmlFor="heading">Stack Overflow</label>
+                        <InputText id="heading" value={stackoverflow} onChange={(e)=>setStackoverflow(e.target.value)} />
+                      </div>
+                    </div>
+                    <div class="field col">
+                      <div className="flex flex-column gap-2">
+                        <label htmlFor="heading">YouTube</label>
+                        <InputText id="heading" value={youtube} onChange={(e)=>setYoutube(e.target.value)} />
+                      </div>
+                    </div>
+                    <div class="field col">
+                      <div className="flex flex-column gap-2">
+                        <label htmlFor="heading">Reddit</label>
+                        <InputText id="heading" value={reddit} onChange={(e)=>setReddit(e.target.value)} />
+                      </div>
+                    </div>
+                    <div class="field col">
+                      <div className="flex flex-column gap-2">
+                        <label htmlFor="heading">Website</label>
+                        <InputText id="heading" value={website} onChange={(e)=>setWebsite(e.target.value)} />
                       </div>
                     </div>
                   </div>
