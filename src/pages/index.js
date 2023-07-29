@@ -6,6 +6,8 @@ import { Checkbox } from 'primereact/checkbox';
 import { SelectButton } from 'primereact/selectbutton';
 import { Editor } from "primereact/editor";
 import { Splitter, SplitterPanel } from 'primereact/splitter';
+import { Dropdown } from 'primereact/dropdown';
+import { iconDropdown } from '../resources/dataIconDropdown';
 
 // import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
@@ -21,6 +23,8 @@ export default function Home() {
   const options = ['Options', '</>'];
   const [value, setValue] = useState(options[0]);
   const [activeIndex, setActiveIndex] = useState('Options');
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  // const countries = dataIconDropdown;
 
   const [heading, setHeading] = useState('Markdown Preview');
   const [subtitle, setSubtitle] = useState('React component preview markdown text.');
@@ -135,6 +139,26 @@ export default function Home() {
     setActiveIndex(e.value)
     setValue(e.value)
   }
+
+  const selectedCountryTemplate = (option, props) => {
+    if (option) {
+        return (
+            <div className="flex align-items-center">
+                <div>{option.title}</div>
+            </div>
+        );
+    }
+
+    return <span>{props.placeholder}</span>;
+};
+
+const countryOptionTemplate = (option) => {
+    return (
+        <div className="flex align-items-center">
+            <div>{option.title}</div>
+        </div>
+    );
+};
 
   if(activeIndex === 'Options') {
     return (
@@ -294,6 +318,14 @@ export default function Home() {
                         <InputText id="heading" value={website} onChange={(e)=>setWebsite(e.target.value)} />
                       </div>
                     </div>
+                    <div class="field col">
+                      <div className="flex flex-column gap-2">
+                        <label htmlFor="heading">Icons</label>
+                        <Dropdown value={selectedCountry} onChange={(e) => setSelectedCountry(e.value)} options={iconDropdown} optionLabel="title" placeholder="Select a Country" 
+                          filter valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" />
+                      </div>
+                    </div>
+                    
                   </div>
                 </TabPanel>
                 <TabPanel header="Others">
