@@ -1,4 +1,4 @@
-import React, { useState, useRef  } from "react";
+import React, { useState, useRef } from "react";
 import { TabView, TabPanel } from 'primereact/tabview';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
@@ -8,6 +8,7 @@ import { Editor } from "primereact/editor";
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 import { Dropdown } from 'primereact/dropdown';
 import { iconDropdown } from '../resources/dataIconDropdown';
+import { Button } from 'primereact/button';
 
 // import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
@@ -23,8 +24,24 @@ export default function Home() {
   const options = ['Options', '</>'];
   const [value, setValue] = useState(options[0]);
   const [activeIndex, setActiveIndex] = useState('Options');
-  const [selectedCountry, setSelectedCountry] = useState(null);
-  // const countries = dataIconDropdown;
+
+  const [items, setItems] = useState([{id: 0,icon: "Select an Icon", url: ""}]);
+
+  const handleAdd = () => {
+    setItems([...items, {id: items.length, icon: "Select an Icon", url: "" }]);
+  };
+
+  const handleRemove = (id) => {
+    const updatedItems = items.filter((item) => item.id !== id);
+    setItems(updatedItems);
+  };
+
+  const handleInputChange = (id, field, value) => {
+    const updatedItems = items.map((item) =>
+      item.id === id ? { ...item, [field]: value } : item
+    );
+    setItems(updatedItems);
+  };
 
   const [heading, setHeading] = useState('Markdown Preview');
   const [subtitle, setSubtitle] = useState('React component preview markdown text.');
@@ -96,8 +113,8 @@ export default function Home() {
   if(additional7){source = source.concat(`\n - 😄 Pronouns: ${additional7}`)}
   if(additional8){source = source.concat(`\n - ⚡ Fun fact: ${additional8}`)}
 
-  if(github || devTo || hashnode || linkedin || facebook || instagram || twitter || codepen || codesandbox || stackoverflow || youtube || reddit || website){
-    if(github){source = source.concat(`\n ### Social \n`)}
+  if(website || items.length > 0){
+    {source = source.concat(`\n ### Social \n`)}
   }
   if(github){source = source.concat(` [![](https://img.shields.io/badge/-Github-informational?style=flat-square&logo=github&logoColor=white&color=blue)](${github})`)}
   if(devTo){source = source.concat(` [![](https://img.shields.io/badge/-Dev.To-informational?style=flat-square&logo=devdotto&logoColor=white&color=blue)](${devTo})`)}
@@ -113,6 +130,10 @@ export default function Home() {
   if(reddit){source = source.concat(` [![](https://img.shields.io/badge/-Reddit-informational?style=flat-square&logo=reddit&logoColor=white&color=blue)](${reddit})`)}
   if(website){source = source.concat(` [![](https://img.shields.io/badge/-Website-informational?style=flat-square&logo=circle&logoColor=white&color=blue)](${website})`)}
   
+  items.map((item) => {
+    source = source.concat(` [![](https://img.shields.io/badge/-${item.icon}-informational?style=flat-square&logo=${item.icon}&logoColor=white&color=blue)](${item.url})`)
+  })
+
   // source =  `## Hi there 👋, ${heading || ""}  
   // ${`#### ${subtitle}` || ""}  
   // ${`![${subtitle}](${banner})`|| ""}
@@ -142,23 +163,59 @@ export default function Home() {
 
   const selectedCountryTemplate = (option, props) => {
     if (option) {
-        return (
-            <div className="flex align-items-center">
-                <div>{option.title}</div>
-            </div>
-        );
+      return (
+        <div className="flex align-items-center">
+          <div>{option.title}</div>
+        </div>
+      );
     }
 
-    return <span>{props.placeholder}</span>;
-};
+    return <span>{props.value}</span>;
+  };
 
-const countryOptionTemplate = (option) => {
+  const countryOptionTemplate = (option) => {
     return (
-        <div className="flex align-items-center">
-            <div>{option.title}</div>
-        </div>
+      <div className="flex align-items-center">
+        <div>{option.title}</div>
+      </div>
     );
-};
+  };
+
+  const IconDropdownView = () => {
+    return(
+      <>
+        {items.map((item, index) => (
+          <div className="formgrid grid" key={`social-${index}`}>
+            <div className="field col-5">
+              <div className="flex flex-column gap-2">
+                <label htmlFor="heading">Icons</label>
+                <Dropdown value={item.icon} onChange={(e) => handleInputChange(item.id, 'icon', e.value.title)} options={iconDropdown} optionLabel="title" placeholder="Select an Icon" 
+                  filter valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full" />
+              </div>
+            </div>
+            <div className="field col-5">
+              <div className="flex flex-column gap-2">
+                <label htmlFor="heading">Url</label>
+                <InputText id="heading" value={item.url} onChange={(e)=>handleInputChange(item.id, 'url', e.target.value)} />
+              </div>
+            </div>
+            <div className="field col-1">
+              <div className="flex flex-column gap-2">
+                <label htmlFor="heading">&nbsp;</label>
+                <Button label="+" onClick={() => handleAdd()}/>
+              </div>
+            </div>
+            <div className="field col-1">
+              <div className="flex flex-column gap-2">
+                <label htmlFor="heading">&nbsp;</label>
+                <Button label="-" onClick={() => handleRemove(item.id)}/>
+              </div>
+            </div>
+          </div>
+        ))}
+      </>
+    )
+  }
 
   if(activeIndex === 'Options') {
     return (
@@ -187,50 +244,50 @@ const countryOptionTemplate = (option) => {
                   </div>
                 </TabPanel>
                 <TabPanel header="Additional">
-                  <div class="formgrid grid">
-                    <div class="field col-6">
+                  <div className="formgrid grid">
+                    <div className="field col-6">
                       <div className="flex flex-column gap-2">
                         <label htmlFor="heading">🔭 I’m currently working on...</label>
                         <InputText id="heading" value={additional1} onChange={(e)=>setAdditional1(e.target.value)} />
                       </div>
                     </div>
-                    <div class="field col-6">
+                    <div className="field col-6">
                       <div className="flex flex-column gap-2">
                         <label htmlFor="heading">🌱 I’m currently learning...</label>
                         <InputText id="heading" value={additional2} onChange={(e)=>setAdditional2(e.target.value)} />
                       </div>
                     </div>
-                    <div class="field col-6">
+                    <div className="field col-6">
                       <div className="flex flex-column gap-2">
                         <label htmlFor="heading">👯 I want to collaborate on...</label>
                         <InputText id="heading" value={additional3} onChange={(e)=>setAdditional3(e.target.value)} />
                       </div>
                     </div>
-                    <div class="field col-6">
+                    <div className="field col-6">
                       <div className="flex flex-column gap-2">
                         <label htmlFor="heading">🤔 I’m looking for help with...</label>
                         <InputText id="heading" value={additional4} onChange={(e)=>setAdditional4(e.target.value)} />
                       </div>
                     </div>
-                    <div class="field col-6">
+                    <div className="field col-6">
                       <div className="flex flex-column gap-2">
                         <label htmlFor="heading">💬 Ask me about...</label>
                         <InputText id="heading" value={additional5} onChange={(e)=>setAdditional5(e.target.value)} />
                       </div>
                     </div>
-                    <div class="field col-6">
+                    <div className="field col-6">
                       <div className="flex flex-column gap-2">
                         <label htmlFor="heading">📫 How to reach me:</label>
                         <InputText id="heading" value={additional6} onChange={(e)=>setAdditional6(e.target.value)} />
                       </div>
                     </div>
-                    <div class="field col-6">
+                    <div className="field col-6">
                       <div className="flex flex-column gap-2">
                         <label htmlFor="heading">😄 Pronouns:</label>
                         <InputText id="heading" value={additional7} onChange={(e)=>setAdditional7(e.target.value)} />
                       </div>
                     </div>
-                    <div class="field col-6">
+                    <div className="field col-6">
                       <div className="flex flex-column gap-2">
                         <label htmlFor="heading">⚡ Fun fact:</label>
                         <InputText id="heading" value={additional8} onChange={(e)=>setAdditional8(e.target.value)} />
@@ -239,94 +296,15 @@ const countryOptionTemplate = (option) => {
                   </div>
                 </TabPanel>
                 <TabPanel header="Social">
-                  <div class="formgrid grid">
-                    <div class="field col">
-                      <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Github</label>
-                        <InputText id="heading" value={github} onChange={(e)=>setGithub(e.target.value)} />
-                      </div>
-                    </div>
-                    <div class="field col">
-                      <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">DEV.TO</label>
-                        <InputText id="heading" value={devTo} onChange={(e)=>setDevTo(e.target.value)} />
-                      </div>
-                    </div>
-                    <div class="field col">
-                      <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Hashnode</label>
-                        <InputText id="heading" value={hashnode} onChange={(e)=>setHashnode(e.target.value)} />
-                      </div>
-                    </div>
-                    <div class="field col">
-                      <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">LinkedIn</label>
-                        <InputText id="heading" value={linkedin} onChange={(e)=>setLinkedin(e.target.value)} />
-                      </div>
-                    </div>
-                    <div class="field col">
-                      <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Facebook</label>
-                        <InputText id="heading" value={facebook} onChange={(e)=>setFacebook(e.target.value)} />
-                      </div>
-                    </div>
-                    <div class="field col">
-                      <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Instagram</label>
-                        <InputText id="heading" value={instagram} onChange={(e)=>setInstagram(e.target.value)} />
-                      </div>
-                    </div>
-                    <div class="field col">
-                      <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Twitter</label>
-                        <InputText id="heading" value={twitter} onChange={(e)=>setTwitter(e.target.value)} />
-                      </div>
-                    </div>
-                    <div class="field col">
-                      <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Codepen</label>
-                        <InputText id="heading" value={codepen} onChange={(e)=>setCodepen(e.target.value)} />
-                      </div>
-                    </div>
-                    <div class="field col">
-                      <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">CodeSandbox</label>
-                        <InputText id="heading" value={codesandbox} onChange={(e)=>setCodesandbox(e.target.value)} />
-                      </div>
-                    </div>
-                    <div class="field col">
-                      <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Stack Overflow</label>
-                        <InputText id="heading" value={stackoverflow} onChange={(e)=>setStackoverflow(e.target.value)} />
-                      </div>
-                    </div>
-                    <div class="field col">
-                      <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">YouTube</label>
-                        <InputText id="heading" value={youtube} onChange={(e)=>setYoutube(e.target.value)} />
-                      </div>
-                    </div>
-                    <div class="field col">
-                      <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Reddit</label>
-                        <InputText id="heading" value={reddit} onChange={(e)=>setReddit(e.target.value)} />
-                      </div>
-                    </div>
-                    <div class="field col">
+                  <div className="formgrid grid">
+                    <div className="field col-12">
                       <div className="flex flex-column gap-2">
                         <label htmlFor="heading">Website</label>
                         <InputText id="heading" value={website} onChange={(e)=>setWebsite(e.target.value)} />
                       </div>
                     </div>
-                    <div class="field col">
-                      <div className="flex flex-column gap-2">
-                        <label htmlFor="heading">Icons</label>
-                        <Dropdown value={selectedCountry} onChange={(e) => setSelectedCountry(e.value)} options={iconDropdown} optionLabel="title" placeholder="Select a Country" 
-                          filter valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} className="w-full md:w-14rem" />
-                      </div>
-                    </div>
-                    
                   </div>
+                  <IconDropdownView />
                 </TabPanel>
                 <TabPanel header="Others">
                   <div className="flex field flex-column gap-2">
