@@ -1,5 +1,10 @@
 export const iconDropdown = [
 		{
+			"title": "Select an Icon",
+			"hex": "512BD4",
+			"source": "https://github.com/dotnet/brand/tree/defe0408e765b48223a434a0d9a94213edc062f8"
+		},
+		{
 			"title": ".ENV",
 			"hex": "ECD53F",
 			"source": "https://github.com/motdotla/dotenv/tree/40e75440337d1de2345dc8326d6108331f583fd8",
