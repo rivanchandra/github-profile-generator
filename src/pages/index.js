@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { TabView, TabPanel } from 'primereact/tabview';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
@@ -25,6 +25,19 @@ export default function Home() {
   const options = ['Options', '</>'];
   const [value, setValue] = useState(options[0]);
   const [activeIndex, setActiveIndex] = useState('Options');
+
+  const [heading, setHeading] = useState(`Markdown Preview`);
+  const [subtitle, setSubtitle] = useState(`React component preview markdown text.`);
+  const [banner, setBanner] = useState(`https://arturssmirnovs.github.io/github-profile-readme-generator/images/banner.png`);
+  const [aboutMe, setAboutMe] = useState(`I made this project just for fun, it allows you to create nice and simple GitHub Readme files that you can copy/paste and use in your profile.`);
+  const [additional1, setAdditional1] = useState('');
+  const [additional2, setAdditional2] = useState('');
+  const [additional3, setAdditional3] = useState('');
+  const [additional4, setAdditional4] = useState('');
+  const [additional5, setAdditional5] = useState('');
+  const [additional6, setAdditional6] = useState('');
+  const [additional7, setAdditional7] = useState('');
+  const [additional8, setAdditional8] = useState('');
 
   // Social================================================================================
   const [items, setItems] = useState([{id: 0, icon: "Select an Icon", url: ""}]);
@@ -69,92 +82,37 @@ export default function Home() {
   };
   // Skill================================================================================
 
-  const [heading, setHeading] = useState('Markdown Preview');
-  const [subtitle, setSubtitle] = useState('React component preview markdown text.');
-  const [banner, setBanner] = useState('https://arturssmirnovs.github.io/github-profile-readme-generator/images/banner.png');
-  const [aboutMe, setAboutMe] = useState('I made this project just for fun, it allows you to create nice and simple GitHub Readme files that you can copy/paste and use in your profile.');
-  const [additional1, setAdditional1] = useState('');
-  const [additional2, setAdditional2] = useState('');
-  const [additional3, setAdditional3] = useState('');
-  const [additional4, setAdditional4] = useState('');
-  const [additional5, setAdditional5] = useState('');
-  const [additional6, setAdditional6] = useState('');
-  const [additional7, setAdditional7] = useState('');
-  const [additional8, setAdditional8] = useState('');
-
-  const [github, setGithub] = useState('');
-  const [devTo, setDevTo] = useState('');
-  const [hashnode, setHashnode] = useState('');
-  const [linkedin, setLinkedin] = useState('');
-  const [facebook, setFacebook] = useState('');
-  const [instagram, setInstagram] = useState('');
-  const [twitter, setTwitter] = useState('');
-  const [codepen, setCodepen] = useState('');
-  const [codesandbox, setCodesandbox] = useState('');
-  const [stackoverflow, setStackoverflow] = useState('');
-  const [youtube, setYoutube] = useState('');
-  const [reddit, setReddit] = useState('');
+  // Other================================================================================
+  const [username, setUsername] = useState('');
+  const [profileViewsChecked, setProfileViewsChecked] = useState(false);
+  const [githubStatisticChecked, setGithubStatisticChecked] = useState(false);
+  const [githubActivityChecked, setGithubActivityChecked] = useState(false);
+  const [languageChecked, setLanguageChecked] = useState(false);
+  const [showTropiesChecked, setShowTropiesChecked] = useState(false);
+  const [githubMetricsChecked, setGithubMetricsChecked] = useState(false);
+  const [githubStreakChecked, setGithubStreakChecked] = useState(false);
   
+  let initialSource = "";
 
-  // const headingRef = useRef('Markdown Preview');
-  // const subtitleRef = useRef('React component preview markdown text.');
-  // const bannerRef = useRef('https://arturssmirnovs.github.io/github-profile-readme-generator/images/banner.png');
-  // const aboutMeRef = useRef('I made this project just for fun, it allows you to create nice and simple GitHub Readme files that you can copy/paste and use in your profile.');
-
-  const codeRef = useRef('');
-  let source = "";
-
-  // const headingChange = (event) => {
-  //   headingRef.current = event.target.value;
-  // };
-
-  // const subtitleChange = (event) => {
-  //   subtitleRef.current = event.target.value;
-  // };
-
-  // const bannerChange = (event) => {
-  //   bannerRef.current = event.target.value;
-  // };
-
-  // const aboutMeChange = (event) => {
-  //   aboutMeRef.current = event.target.value;
-  // };
-
-  const codeChange = (event) => {
-    codeRef.current = event.htmlValue;
-    source = event.htmlValue;
-  };
-
-  source = `## Hi there 👋, `;
-  if(heading){source = source.concat(heading)}
-  if(subtitle){source = source.concat(`\n #### ${subtitle}`)}
-  if(banner){source = source.concat(`\n ![${subtitle}](${banner})`)}
-  if(aboutMe){source = source.concat(`\n > ${aboutMe}`)}
-  if(additional1){source = source.concat(`\n - 🔭 I’m currently working on ${additional1}`)}
-  if(additional2){source = source.concat(`\n - 🌱 I’m currently learning ${additional2}`)}
-  if(additional3){source = source.concat(`\n - 👯 I want to collaborate on ${additional3}`)}
-  if(additional4){source = source.concat(`\n - 🤔 I’m looking for help with ${additional4}`)}
-  if(additional5){source = source.concat(`\n - 💬 Ask me about ${additional5}`)}
-  if(additional6){source = source.concat(`\n - 📫 How to reach me: ${additional6}`)}
-  if(additional7){source = source.concat(`\n - 😄 Pronouns: ${additional7}`)}
-  if(additional8){source = source.concat(`\n - ⚡ Fun fact: ${additional8}`)}
+  initialSource = `## Hi there 👋, `;
+  if(heading){initialSource = `${initialSource}${heading}`}
+  if(subtitle){initialSource = `${initialSource}\n#### ${subtitle}`}
+  if(banner){initialSource = `${initialSource}\n![${subtitle}](${banner})`}
+  if(aboutMe){initialSource = `${initialSource}\n> ${aboutMe}`}
+  if(additional1){initialSource = `${initialSource}\n- 🔭 I’m currently working on ${additional1}`}
+  if(additional2){initialSource = `${initialSource}\n- 🌱 I’m currently learning ${additional2}`}
+  if(additional3){initialSource = `${initialSource}\n- 👯 I want to collaborate on ${additional3}`}
+  if(additional4){initialSource = `${initialSource}\n- 🤔 I’m looking for help with ${additional4}`}
+  if(additional5){initialSource = `${initialSource}\n- 💬 Ask me about ${additional5}`}
+  if(additional6){initialSource = `${initialSource}\n- 📫 How to reach me: ${additional6}`}
+  if(additional7){initialSource = `${initialSource}\n- 😄 Pronouns: ${additional7}`}
+  if(additional8){initialSource = `${initialSource}\n- ⚡ Fun fact: ${additional8}`}
 
   if(website || items.length > 1 || items[0].icon !== 'Select an Icon'){
-    {source = source.concat(`\n ### Social \n`)}
+    {initialSource = `${initialSource}\n### Social \n`}
   }
-  // if(github){source = source.concat(` [![](https://img.shields.io/badge/-Github-informational?style=flat-square&logo=github&logoColor=white&color=blue)](${github})`)}
-  // if(devTo){source = source.concat(` [![](https://img.shields.io/badge/-Dev.To-informational?style=flat-square&logo=devdotto&logoColor=white&color=blue)](${devTo})`)}
-  // if(hashnode){source = source.concat(` [![](https://img.shields.io/badge/-Hashnode-informational?style=flat-square&logo=hashnode&logoColor=white&color=blue)](${hashnode})`)}
-  // if(linkedin){source = source.concat(` [![](https://img.shields.io/badge/-Linkedin-informational?style=flat-square&logo=linkedin&logoColor=white&color=blue)](${linkedin})`)}
-  // if(facebook){source = source.concat(` [![](https://img.shields.io/badge/-Facebook-informational?style=flat-square&logo=facebook&logoColor=white&color=blue)](${facebook})`)}
-  // if(instagram){source = source.concat(` [![](https://img.shields.io/badge/-Instagram-informational?style=flat-square&logo=instagram&logoColor=white&color=blue)](${instagram})`)}
-  // if(twitter){source = source.concat(` [![](https://img.shields.io/badge/-Twitter-informational?style=flat-square&logo=twitter&logoColor=white&color=blue)](${twitter})`)}
-  // if(codepen){source = source.concat(` [![](https://img.shields.io/badge/-Codepen-informational?style=flat-square&logo=codepen&logoColor=white&color=blue)](${codepen})`)}
-  // if(codesandbox){source = source.concat(` [![](https://img.shields.io/badge/-Codesandbox-informational?style=flat-square&logo=codesandbox&logoColor=white&color=blue)](${codesandbox})`)}
-  // if(stackoverflow){source = source.concat(` [![](https://img.shields.io/badge/-Stackoverflow-informational?style=flat-square&logo=stackoverflow&logoColor=white&color=blue)](${stackoverflow})`)}
-  // if(youtube){source = source.concat(` [![](https://img.shields.io/badge/-Youtube-informational?style=flat-square&logo=youtube&logoColor=white&color=blue)](${youtube})`)}
-  // if(reddit){source = source.concat(` [![](https://img.shields.io/badge/-Reddit-informational?style=flat-square&logo=reddit&logoColor=white&color=blue)](${reddit})`)}
-  if(website){source = source.concat(` [![](https://img.shields.io/badge/-Website-informational?style=flat-square&logo=circle&logoColor=white&color=blue)](${website})`)}
+  
+  if(website){initialSource = `${initialSource} [![](https://img.shields.io/badge/-Website-informational?style=flat-square&logo=circle&logoColor=white&color=blue)](${website})`}
   
   items.map((item) => {
     if(item.icon !== 'Select an Icon'){
@@ -162,12 +120,12 @@ export default function Home() {
 
       const stringWithoutSpaces = lowercasedString.replace(/\s/g, '');
       const hyphenatedString = item.icon.replace(/\s/g, '');
-      source = source.concat(` [![](https://img.shields.io/badge/${hyphenatedString}-informational?style=flat-square&logo=${stringWithoutSpaces}&logoColor=white&color=${colorSocial})](${item.url})`)
+      initialSource = `${initialSource} [![](https://img.shields.io/badge/${hyphenatedString}-informational?style=flat-square&logo=${stringWithoutSpaces}&logoColor=white&color=${colorSocial})](${item.url})`
     }
   })
 
   if(skills.length > 1 || skills[0].icon !== 'Select an Icon'){
-    {source = source.concat(`\n ### Skills \n`)}
+    initialSource = `${initialSource}\n ### Skills \n`;
   }
 
   skills.map((item) => {
@@ -176,15 +134,41 @@ export default function Home() {
 
       const stringWithoutSpaces = lowercasedString.replace(/\s/g, '');
       const hyphenatedString = item.icon.replace(/\s/g, '');
-      source = source.concat(` ![](https://img.shields.io/badge/${hyphenatedString}-informational?style=flat-square&logo=${stringWithoutSpaces}&logoColor=white&color=${colorSkill})`)
+      initialSource = `${initialSource} ![](https://img.shields.io/badge/${hyphenatedString}-informational?style=flat-square&logo=${stringWithoutSpaces}&logoColor=white&color=${colorSkill})`
     }
   })
 
+  if (username) {
+    initialSource = `${initialSource}\n`;
+    if(profileViewsChecked){initialSource = `${initialSource}\n![](https://komarev.com/ghpvc/?username=${username}&style=flat-square)`}
+    if(githubStatisticChecked){initialSource = `${initialSource}\n\n![](https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true)`}
+    if(githubActivityChecked){initialSource = `${initialSource}\n![](https://github-readme-activity-graph.vercel.app/graph?username=${username}&hide_border=true&theme=minimal)`}
+    if(languageChecked){initialSource = `${initialSource}\n![](https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&layout=compact)`}
+    if(showTropiesChecked){initialSource = `${initialSource}\n![](https://github-profile-trophy.vercel.app/?username=${username})`}
+    if(githubMetricsChecked){initialSource = `${initialSource}\n![](https://metrics.lecoq.io/${username})`}
+    if(githubStreakChecked){initialSource = `${initialSource}\n![](https://streak-stats.demolab.com/?user=${username})`}
+  }
 
-  codeRef.current = source;
+  const [source, setSource] = useState(initialSource);
+  const [editorContent, setEditorContent] = useState(source);
+
+  const codeChange = (e) => {
+    const newSource = e.htmlValue
+      .split('<p>')
+      .map((line) => line.replace('</p>', ''))
+      .join('\n');
+    setSource(newSource);
+    setEditorContent(e.htmlValue);
+  };
+
+  useEffect(() => {
+    // Convert the source to HTML format
+    const htmlContent = initialSource.replace(/\n/g, '<br />');
+    setEditorContent(htmlContent);
+    setSource(initialSource);
+  }, [initialSource]);
 
   const changeTab = (e) => {
-    console.log(e.value)
     setActiveIndex(e.value)
     setValue(e.value)
   }
@@ -306,96 +290,45 @@ export default function Home() {
             </TabPanel>
             <TabPanel header="Others">
               <div className="flex field flex-column gap-2">
-                <label htmlFor="heading">Heading</label>
-                <InputText id="heading" />
+                <label htmlFor="heading">Github Username</label>
+                <InputText id="heading" value={username} onChange={(e) => setUsername(e.target.value)} />
               </div>
               <div className="flex flex-column gap-2">
-                <label htmlFor="heading">Heading</label>
+                <label htmlFor="heading">STATISTICS</label>
                 <div className="flex flex-wrap justify-content-left gap-3">
-                  <div className="flex align-items-left">
-                      <Checkbox inputId="ingredient1" name="pizza" value="Cheese"  />
-                      <label htmlFor="ingredient1" className="ml-2">Cheese</label>
+                  <div className="flex align-items-left field col-4">
+                      <Checkbox inputId="ingredient1" onChange={e => setProfileViewsChecked(e.checked)} checked={profileViewsChecked} />
+                      <label htmlFor="ingredient1" className="ml-2">Show profile views</label>
                   </div>
-                  <div className="flex align-items-left">
-                      <Checkbox inputId="ingredient2" name="pizza" value="Mushroom"  />
-                      <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
+                  <div className="flex align-items-left field col-4">
+                      <Checkbox inputId="ingredient2" onChange={e => setGithubStatisticChecked(e.checked)} checked={githubStatisticChecked} />
+                      <label htmlFor="ingredient2" className="ml-2">Show GitHub statistics</label>
                   </div>
-                  <div className="flex align-items-left">
-                      <Checkbox inputId="ingredient3" name="pizza" value="Pepper"  />
-                      <label htmlFor="ingredient3" className="ml-2">Pepper</label>
+                  <div className="flex align-items-left field col-4">
+                      <Checkbox inputId="ingredient3" onChange={e => setGithubActivityChecked(e.checked)} checked={githubActivityChecked} />
+                      <label htmlFor="ingredient3" className="ml-2">Show GitHub Activity Graph</label>
                   </div>
-                  <div className="flex align-items-left">
-                      <Checkbox inputId="ingredient4" name="pizza" value="Onion"  />
-                      <label htmlFor="ingredient4" className="ml-2">Onion</label>
+                  <div className="flex align-items-left field col-4">
+                      <Checkbox inputId="ingredient4" onChange={e => setLanguageChecked(e.checked)} checked={languageChecked} />
+                      <label htmlFor="ingredient4" className="ml-2">Show most used languages</label>
                   </div>
-                </div>
-              </div>
-              <div className="flex flex-column gap-2">
-                <label htmlFor="heading">Heading</label>
-                <div className="flex flex-wrap justify-content-left gap-3">
-                  <div className="flex align-items-left">
-                      <Checkbox inputId="ingredient1" name="pizza" value="Cheese"  />
-                      <label htmlFor="ingredient1" className="ml-2">Cheese</label>
+                  <div className="flex align-items-left field col-4">
+                      <Checkbox inputId="ingredient5" onChange={e => setShowTropiesChecked(e.checked)} checked={showTropiesChecked} />
+                      <label htmlFor="ingredient5" className="ml-2">Show Github Trophies</label>
                   </div>
-                  <div className="flex align-items-left">
-                      <Checkbox inputId="ingredient2" name="pizza" value="Mushroom"  />
-                      <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
+                  <div className="flex align-items-left field col-4">
+                      <Checkbox inputId="ingredient6" onChange={e => setGithubMetricsChecked(e.checked)} checked={githubMetricsChecked} />
+                      <label htmlFor="ingredient6" className="ml-2">Show GitHub metrics</label>
                   </div>
-                  <div className="flex align-items-left">
-                      <Checkbox inputId="ingredient3" name="pizza" value="Pepper"  />
-                      <label htmlFor="ingredient3" className="ml-2">Pepper</label>
-                  </div>
-                  <div className="flex align-items-left">
-                      <Checkbox inputId="ingredient4" name="pizza" value="Onion"  />
-                      <label htmlFor="ingredient4" className="ml-2">Onion</label>
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-column gap-2">
-                <label htmlFor="heading">Heading</label>
-                <div className="flex flex-wrap justify-content-left gap-3">
-                  <div className="flex align-items-left">
-                      <Checkbox inputId="ingredient1" name="pizza" value="Cheese"  />
-                      <label htmlFor="ingredient1" className="ml-2">Cheese</label>
-                  </div>
-                  <div className="flex align-items-left">
-                      <Checkbox inputId="ingredient2" name="pizza" value="Mushroom"  />
-                      <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
-                  </div>
-                  <div className="flex align-items-left">
-                      <Checkbox inputId="ingredient3" name="pizza" value="Pepper"  />
-                      <label htmlFor="ingredient3" className="ml-2">Pepper</label>
-                  </div>
-                  <div className="flex align-items-left">
-                      <Checkbox inputId="ingredient4" name="pizza" value="Onion"  />
-                      <label htmlFor="ingredient4" className="ml-2">Onion</label>
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-column gap-2">
-                <label htmlFor="heading">Heading</label>
-                <div className="flex flex-wrap justify-content-left gap-3">
-                  <div className="flex align-items-left">
-                      <Checkbox inputId="ingredient1" name="pizza" value="Cheese"  />
-                      <label htmlFor="ingredient1" className="ml-2">Cheese</label>
-                  </div>
-                  <div className="flex align-items-left">
-                      <Checkbox inputId="ingredient2" name="pizza" value="Mushroom"  />
-                      <label htmlFor="ingredient2" className="ml-2">Mushroom</label>
-                  </div>
-                  <div className="flex align-items-left">
-                      <Checkbox inputId="ingredient3" name="pizza" value="Pepper"  />
-                      <label htmlFor="ingredient3" className="ml-2">Pepper</label>
-                  </div>
-                  <div className="flex align-items-left">
-                      <Checkbox inputId="ingredient4" name="pizza" value="Onion"  />
-                      <label htmlFor="ingredient4" className="ml-2">Onion</label>
+                  <div className="flex align-items-left field col-4">
+                      <Checkbox inputId="ingredient7" onChange={e => setGithubStreakChecked(e.checked)} checked={githubStreakChecked} />
+                      <label htmlFor="ingredient7" className="ml-2">Show GitHub Streak Stats</label>
                   </div>
                 </div>
               </div>
             </TabPanel>
             <TabPanel header="Code">
-              <Editor style={{ height: '80vh' }} value={codeRef} onTextChange={(e) => codeChange(e)}/>
+              <Editor style={{ height: '80vh' }} value={editorContent} onTextChange={(e) => codeChange(e)} />
             </TabPanel>
           </TabView>
         </SplitterPanel>
