@@ -5,7 +5,7 @@ import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 
-export const Social = (props) => {
+const Social = (props) => {
   const selectedCountryTemplate = (option, props) => {
     if (option) {
       return (
@@ -63,3 +63,5 @@ export const Social = (props) => {
     </>
   )
 }
+
+export default Social;

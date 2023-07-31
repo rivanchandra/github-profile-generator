@@ -4,7 +4,7 @@ import { iconDropdown } from '../../resources/dataIconDropdown';
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
 
-export const Skills = (props) => {
+const Skills = (props) => {
   const selectedCountryTemplate = (option, props) => {
     if (option) {
       return (
@@ -56,3 +56,5 @@ export const Skills = (props) => {
     </>
   )
 }
+
+export default Skills;
