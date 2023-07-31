@@ -8,8 +8,8 @@ import { Editor } from "primereact/editor";
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 import { ColorPicker } from 'primereact/colorpicker';
 
-import { Social } from "./components/social";
-import { Skills } from "./components/skills";
+import Social from "./components/social";
+import Skills from "./components/skills";
 
 // import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
@@ -54,7 +54,7 @@ export default function Home() {
   };
 
   const handleInputChange = (id, field, value) => {
-    const updatedItems = items.map((item) =>
+    const updatedItems = items?.map((item) =>
       item.id === id ? { ...item, [field]: value } : item
     );
     setItems(updatedItems);
@@ -75,7 +75,7 @@ export default function Home() {
   };
 
   const handleInputChangeSkill = (id, field, value) => {
-    const updatedItems = skills.map((item) =>
+    const updatedItems = skills?.map((item) =>
       item.id === id ? { ...item, [field]: value } : item
     );
     setSkills(updatedItems);
@@ -114,7 +114,7 @@ export default function Home() {
   
   if(website){initialSource = `${initialSource} [![](https://img.shields.io/badge/-Website-informational?style=flat-square&logo=circle&logoColor=white&color=blue)](${website})`}
   
-  items.map((item) => {
+  items?.map((item) => {
     if(item.icon !== 'Select an Icon'){
       const lowercasedString = item.icon.toLowerCase();
 
@@ -128,7 +128,7 @@ export default function Home() {
     initialSource = `${initialSource}\n ### Skills \n`;
   }
 
-  skills.map((item) => {
+  skills?.map((item) => {
     if(item.icon !== 'Select an Icon'){
       const lowercasedString = item.icon.toLowerCase();
 
