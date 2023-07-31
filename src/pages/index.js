@@ -173,7 +173,6 @@ export default function Home() {
     setValue(e.value)
   }
 
-  if(activeIndex === 'Options') {
     return (
       <Splitter >
         <SplitterPanel >
@@ -333,21 +332,11 @@ export default function Home() {
           </TabView>
         </SplitterPanel>
         <SplitterPanel >
-      <div className="card flex justify-content-end"> 
-        <SelectButton value={value} onChange={(e) => changeTab(e)} options={options} />
-      </div>
       <div data-color-mode="light">
         <MDPreview source={source} />
       </div>
     </SplitterPanel>
   </ Splitter>
   )
-}
-else
-{
-  return (
-    <p>test</p>
-  )
-}
 
 }
