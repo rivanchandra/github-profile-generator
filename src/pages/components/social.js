@@ -5,7 +5,7 @@ import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
 import { InputText } from 'primereact/inputtext';
 
-export const Social = (props) => {
+export default function Social(props) {
   const selectedCountryTemplate = (option, props) => {
     if (option) {
       return (
@@ -28,7 +28,7 @@ export const Social = (props) => {
 
   return(
     <>
-      {props.items.map((item, index) => (
+      {props.items?.map((item, index) => (
         <div className="formgrid grid" key={`social-${index}`}>
           <div className="field col-5">
             <div className="flex flex-column gap-2">

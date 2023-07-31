@@ -4,7 +4,7 @@ import { iconDropdown } from '../../resources/dataIconDropdown';
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
 
-export const Skills = (props) => {
+export default function Skills(props) {
   const selectedCountryTemplate = (option, props) => {
     if (option) {
       return (
@@ -27,7 +27,7 @@ export const Skills = (props) => {
 
   return(
     <>
-      {props.skills.map((item, index) => (
+      {props.skills?.map((item, index) => (
         <div className="formgrid grid" key={`social-${index}`}>
           <div className="field col-10">
             <div className="flex flex-column gap-2">
