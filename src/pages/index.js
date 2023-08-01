@@ -332,9 +332,9 @@ export default function Home() {
           </TabView>
         </SplitterPanel>
         <SplitterPanel >
-      <div data-color-mode="light">
-        <MDPreview source={source} />
-      </div>
+        <div data-color-mode="light">
+          <MDPreview source={source} />
+        </div>
     </SplitterPanel>
   </ Splitter>
   )
