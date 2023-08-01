@@ -7,6 +7,7 @@ import { SelectButton } from 'primereact/selectbutton';
 import { Editor } from "primereact/editor";
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 import { ColorPicker } from 'primereact/colorpicker';
+import { Fieldset } from 'primereact/fieldset';
 
 import Social from "./components/social";
 import Skills from "./components/skills";
@@ -327,6 +328,19 @@ export default function Home() {
               </div>
             </TabPanel>
             <TabPanel header="Code">
+              <div className="card">
+                <Fieldset legend="Markdown Tips" toggleable>
+                  <div class="md-tips mt-3"><ul><li data-i18n="markdownTips.bolden">To <b>bolden</b> the text, wrap it with two asterisks (*) (<code>**<b>word</b>**</code>)</li> <li data-i18n="markdownTips.italize">To <i>italisize</i> the text, wrap it with one asterisk (*) (<code>*<i>word</i>*</code>)</li> <li data-i18n="markdownTips.strikethrough">To <s>strikethrough</s> the text, wrap it with two tildes (~) (<code>~~<s>word</s>~~</code>)</li> <li data-i18n="markdownTips.link">To make a <a href="#">link</a>, place the link text in brackets and the url in parentheses
+                      (<code>[<a href="http://example.com">link</a>](http://example.com)</code>)</li> <li data-i18n="markdownTips.icon">To make an image, place an !, the alt
+                      text in brackets, and the url in parentheses (<code>![github](/images/icon.png)</code>)</li></ul> <p data-i18n="markdownTips.learnMore">
+                  Learn more:
+                  &nbsp;<a href="https://guides.github.com/features/mastering-markdown/" target="_blank">
+                      https://guides.github.com/features/mastering-markdown/
+                  </a></p></div>
+                  <b style={{color:'red'}}>WARNING: Changing source manually could result in lost of data if you use generation fields again.</b>
+                </Fieldset>
+              </div>
+              <br/>
               <Editor style={{ height: '80vh' }} value={editorContent} onTextChange={(e) => codeChange(e)} />
             </TabPanel>
           </TabView>
